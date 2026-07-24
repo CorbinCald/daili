@@ -1,6 +1,6 @@
 # Daili public resources
 
-This repository intentionally contains only the public resources needed by the
+This repository contains the public resources needed by the
 Daili Android app:
 
 - the privacy policy and third-party model notices published with GitHub Pages;
