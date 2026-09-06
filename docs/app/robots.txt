@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://corbincald.github.io/daili/app/sitemap.xml
