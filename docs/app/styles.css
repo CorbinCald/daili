@@ -512,13 +512,10 @@ p {
 .allowance-result output {
   font-family: var(--sans);
   font-weight: 500;
-  font-size: 67px;
+  font-size: min(67px, calc(180cqw / var(--amount-length, 6)));
   line-height: 1.2;
   display: block;
   letter-spacing: -0.03em;
-}
-.allowance-result output[data-long="true"] {
-  font-size: min(67px, 18cqw);
 }
 .allowance-result p {
   font-size: 10px;

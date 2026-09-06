@@ -10,7 +10,7 @@ if (form) {
   const error = document.querySelector("#calculation-error");
   const showAmount = (value) => {
     output.value = value;
-    output.dataset.long = String(value.length > 7);
+    output.style.setProperty("--amount-length", String(value.length));
   };
   const update = () => {
     const cap = form.elements.monthly;
