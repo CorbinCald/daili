@@ -468,6 +468,13 @@ p {
   margin-top: 6px;
   background: white;
 }
+.input-money:focus-within {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.input-money input:focus-visible {
+  outline: none;
+}
 .input-money span {
   padding-left: 14px;
   font-size: 15px;
@@ -492,6 +499,7 @@ p {
   font-size: 13px;
 }
 .allowance-result {
+  container-type: inline-size;
   margin-top: 24px;
   border-top: 1px solid var(--line);
   padding-top: 19px;
@@ -508,6 +516,9 @@ p {
   line-height: 1.2;
   display: block;
   letter-spacing: -0.03em;
+}
+.allowance-result output[data-long="true"] {
+  font-size: min(67px, 18cqw);
 }
 .allowance-result p {
   font-size: 10px;

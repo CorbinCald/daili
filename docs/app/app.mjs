@@ -8,6 +8,10 @@ if (form) {
   const output = document.querySelector("#daily-allowance");
   const detail = document.querySelector("#calculation-detail");
   const error = document.querySelector("#calculation-error");
+  const showAmount = (value) => {
+    output.value = value;
+    output.dataset.long = String(value.length > 7);
+  };
   const update = () => {
     const cap = form.elements.monthly;
     const bills = form.elements.recurring;
@@ -17,7 +21,7 @@ if (form) {
       bills.validity.valid &&
       [28, 29, 30, 31].includes(days);
     if (!valid) {
-      output.value = "—";
+      showAmount("—");
       detail.textContent = "Add valid amounts to see your example.";
       error.textContent =
         "Enter amounts from $0 to $1,000,000, with up to two decimal places.";
@@ -29,14 +33,14 @@ if (form) {
       Math.round(Number(cap.value) * 100) -
       Math.round(Number(bills.value) * 100);
     if (remainingCents < 0) {
-      output.value = "—";
+      showAmount("—");
       detail.textContent = `${money.format(-remainingCents / 100)} over your monthly cap`;
       error.textContent =
         "Recurring expenses exceed this cap. Adjust the example to leave room for everyday spending.";
       error.hidden = false;
       return;
     }
-    output.value = money.format(remainingCents / 100 / days);
+    showAmount(money.format(remainingCents / 100 / days));
     detail.textContent = `${money.format(remainingCents / 100)} for everyday spending ÷ ${days} days`;
     error.hidden = true;
     error.textContent = "";
