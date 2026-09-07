@@ -1,3 +1,5 @@
+import "./feature-videos.mjs";
+
 const form = document.querySelector("#allowance-form");
 const money = new Intl.NumberFormat("en-US", {
   style: "currency",
