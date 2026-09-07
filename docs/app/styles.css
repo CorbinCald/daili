@@ -402,7 +402,7 @@ p {
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 15 / 22;
+  aspect-ratio: 5 / 8;
   background: var(--ink);
 }
 .feature-video figcaption {
