@@ -1,16 +1,21 @@
 WEBVTT
 
-00:00.000 --> 00:02.267
-[Acoustic instrumental: Paper Trail] Point the camera at a receipt and capture it.
+00:00.000 --> 00:02.767 line:86% position:50% size:90% align:center
+[Soft music] Lunch with friends.
+The bill is $64.
 
-00:02.267 --> 00:03.767
-Daili reads the receipt on the phone. Processing wait shortened.
+00:02.767 --> 00:04.033 line:86% position:50% size:90% align:center
+Scan the receipt. Processing
+wait shortened.
 
-00:03.767 --> 00:06.767
-Review the receipt: Red Dirt Diner, $64.00, and five line items.
+00:04.033 --> 00:06.600 line:86% position:50% size:90% align:center
+Here’s the total: $64 from Red
+Dirt Diner.
 
-00:06.767 --> 00:09.367
-Check the detected line items and correct anything that needs editing.
+00:06.600 --> 00:08.500 line:86% position:50% size:90% align:center
+And what you ordered. Check the
+items.
 
-00:09.367 --> 00:12.000
-Review the whole receipt before choosing Save receipt. Optional feature; initial model download required.
+00:08.500 --> 00:12.000 line:86% position:50% size:90% align:center
+Review before saving. Initial
+model download required.
