@@ -15,6 +15,11 @@
   --line: #cedbdf;
   --sans: "IBM Plex Sans", Arial, sans-serif;
   --header-height: clamp(80px, 11svh, 114px);
+  /* Outer section space, then smaller gaps for related content and card edges. */
+  --section-space: clamp(56px, 8svh, 96px);
+  --group-space: clamp(32px, 4vw, 48px);
+  --column-space: clamp(32px, 6vw, 88px);
+  --card-space: clamp(20px, 2.5vw, 32px);
 }
 * {
   box-sizing: border-box;
@@ -350,7 +355,7 @@ p {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding-block: 25px;
+  padding-block: 24px;
   font-size: 11px;
   font-weight: 600;
 }
@@ -364,14 +369,14 @@ p {
   color: var(--accent);
 }
 .entry-section {
-  padding-block: 88px;
+  padding-block: var(--section-space);
   background: var(--surface);
 }
 .entry-heading {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
   align-items: end;
-  gap: 48px;
+  gap: var(--group-space);
 }
 .entry-heading h2 {
   margin-top: 22px;
@@ -384,16 +389,23 @@ p {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
-  margin-top: 40px;
+  margin-top: var(--group-space);
 }
 .entry-card {
-  --entry-padding: 34px;
+  --entry-padding: var(--card-space);
   display: flex;
   flex-direction: column;
   padding: var(--entry-padding);
   border-top: 3px solid var(--accent);
   border-radius: 4px 4px 12px 12px;
   background: var(--paper);
+}
+/* Shared rows keep paired titles, descriptions and film frames aligned. */
+.entry-section .entry-card {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 5;
+  row-gap: 0;
 }
 .entry-method {
   color: var(--accent);
@@ -407,16 +419,28 @@ p {
   font-weight: 500;
 }
 .entry-card > p:last-of-type {
-  margin-block: 18px 30px;
+  margin-block: 16px 24px;
   max-width: 420px;
   font-size: 16px;
 }
 .feature-video {
-  margin: 0 calc(-1 * var(--entry-padding)) 28px;
+  margin: 0 0 24px;
+  min-width: 0;
+}
+.feature-video-stage {
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #e7efed;
 }
 .feature-video video {
   display: block;
-  width: 100%;
+  /* Keep the complete portrait film in view on laptops; narrow screens
+     use the available card width. Native fullscreen remains available. */
+  width: min(100%, clamp(260px, 46svh, 360px));
+  border-radius: 6px;
   height: auto;
   aspect-ratio: 5 / 8;
   background: var(--ink);
@@ -424,10 +448,10 @@ p {
 .feature-video figcaption {
   color: var(--muted);
   font-size: 12px;
-  margin: 12px var(--entry-padding) 0;
+  margin: 16px 0 0;
 }
 .feature-video .text-link {
-  margin: 10px var(--entry-padding) 0;
+  margin: 8px 0 0;
   min-height: 28px;
 }
 .entry-flow {
@@ -455,7 +479,7 @@ p {
   justify-content: space-between;
   align-items: center;
   gap: 28px;
-  margin-top: 28px;
+  margin-top: 32px;
 }
 .entry-setup p {
   max-width: 720px;
@@ -468,10 +492,16 @@ p {
   flex-shrink: 0;
 }
 .section {
-  padding-block: 112px;
+  padding-block: var(--section-space);
 }
 .section-intro {
-  max-width: 585px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  align-items: end;
+  column-gap: var(--group-space);
+}
+.section-intro .eyebrow {
+  grid-column: 1 / -1;
 }
 .section-intro h2 {
   margin-top: 22px;
@@ -484,12 +514,14 @@ p {
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-  margin-top: 56px;
+  gap: var(--group-space);
+  margin-top: var(--group-space);
 }
 .steps article {
+  display: flex;
+  flex-direction: column;
   border-top: 1px solid var(--line);
-  padding-top: 26px;
+  padding-top: 24px;
 }
 .step-number {
   font-size: 9px;
@@ -501,22 +533,28 @@ p {
   margin-top: 20px;
 }
 .steps p {
-  font-size: 13px;
-  margin-top: 15px;
+  font-size: 14px;
+  margin-block: 16px 24px;
   line-height: 1.85;
   max-width: 320px;
 }
 .step-line,
 .expense-mini {
-  margin-top: 28px;
+  margin-top: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px;
+  min-height: 50px;
   border-radius: 5px;
   background: var(--surface);
   font-size: 9px;
   letter-spacing: 0.07em;
+}
+.step-line > span:nth-child(2) {
+  font-size: 18px;
+  line-height: 1;
+  color: var(--accent);
 }
 .expense-mini {
   background: var(--surface);
@@ -525,28 +563,28 @@ p {
 }
 .demo-section {
   background: var(--surface);
-  padding: 87px 0;
+  padding-block: var(--section-space);
 }
 .demo-layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 115px;
+  gap: var(--column-space);
   align-items: center;
 }
 .demo-layout h2 {
   margin-top: 22px;
 }
-.demo-layout > div > p:not(.eyebrow) {
+.demo-layout > div:not(.calculator) > p:not(.eyebrow) {
   font-size: 14px;
   margin-top: 25px;
   max-width: 390px;
   line-height: 1.85;
 }
-.demo-layout > div > p.demo-note {
+.demo-layout > div:not(.calculator) > p.demo-note {
   font-size: 11px;
 }
 .calculator {
-  padding: 30px;
+  padding: var(--card-space);
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -558,9 +596,10 @@ p {
   align-items: center;
   font-size: 14px;
   font-weight: 700;
-  padding-bottom: 22px;
+  gap: 16px;
+  padding-bottom: 20px;
   border-bottom: 1px solid var(--line);
-  margin-bottom: 19px;
+  margin-bottom: 20px;
 }
 .demo-tag {
   font-size: 8px;
@@ -572,9 +611,10 @@ p {
 .calculator label {
   display: flex;
   justify-content: space-between;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
-  margin-top: 17px;
+  margin-top: 20px;
+  gap: 12px;
 }
 .calculator label span {
   font-size: 9px;
@@ -623,7 +663,7 @@ p {
   container-type: inline-size;
   margin-top: 24px;
   border-top: 1px solid var(--line);
-  padding-top: 19px;
+  padding-top: 20px;
 }
 .allowance-result > span {
   font-size: 8px;
@@ -643,7 +683,7 @@ p {
 }
 .local-note {
   margin-top: 20px;
-  font-size: 9px;
+  font-size: 12px;
 }
 .form-error {
   font-size: 12px;
@@ -653,26 +693,31 @@ p {
 .feature-pair {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 110px;
+  gap: var(--column-space);
   align-items: center;
 }
 .pace-art {
+  /* Frame the intact capture and its caption as a single centered group. */
+  --pace-phone-height: clamp(
+    420px,
+    calc(100svh - 2 * var(--section-space) - 104px),
+    540px
+  );
   background: var(--surface);
-  position: relative;
   border-radius: 12px;
-  min-height: 640px;
+  padding: 32px 24px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  overflow: hidden;
+  gap: 20px;
 }
 .pace-art .phone {
-  transform: none;
-  width: 235px;
-  z-index: 1;
+  width: min(250px, calc((var(--pace-phone-height) - 18px) / 2.244444 + 18px));
+  max-width: 100%;
 }
 .pace-art .image-caption {
-  bottom: 13px;
+  position: static;
+  font-size: 11px;
 }
 .feature-copy h2 {
   margin-top: 22px;
@@ -700,7 +745,7 @@ p {
 .privacy-section {
   background: var(--ink);
   color: var(--paper);
-  padding: 90px 0;
+  padding-block: var(--section-space);
 }
 .privacy-section .eyebrow {
   color: var(--surface);
@@ -709,23 +754,23 @@ p {
   color: var(--accent-soft);
 }
 .privacy-heading {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
   align-items: end;
-  gap: 50px;
+  gap: var(--group-space);
   margin-top: 22px;
 }
 .privacy-heading p {
+  max-width: 355px;
   color: #c8dde0;
   font-size: 13px;
-  padding-bottom: 10px;
   line-height: 1.9;
 }
 .privacy-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 49px;
-  margin-top: 59px;
+  gap: var(--group-space);
+  margin-top: var(--group-space);
 }
 .privacy-grid article {
   border-top: 1px solid #465f6b;
@@ -741,7 +786,7 @@ p {
   font-size: 20px;
 }
 .privacy-grid p {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.85;
   color: #c8dde0;
   margin-top: 15px;
@@ -749,7 +794,7 @@ p {
 .faq-section {
   display: grid;
   grid-template-columns: 0.75fr 1.25fr;
-  gap: 90px;
+  gap: var(--column-space);
 }
 .faq-section h2 {
   margin-top: 23px;
@@ -759,24 +804,33 @@ p {
   margin-top: 25px;
   line-height: 2;
 }
+.questions {
+  border-top: 1px solid var(--line);
+}
 .questions details {
   border-bottom: 1px solid var(--line);
 }
 .questions summary {
   list-style: none;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
-  padding: 22px 0;
+  padding: 20px 8px;
 }
 .questions summary::-webkit-details-marker {
   display: none;
 }
 .questions summary span {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  line-height: 1;
   font-size: 20px;
   font-weight: 400;
   color: var(--accent);
@@ -785,23 +839,24 @@ p {
   transform: rotate(45deg);
 }
 .answer {
-  padding: 0 25px 24px 0;
-  font-size: 12px;
+  padding: 0 40px 24px 8px;
+  font-size: 14px;
   line-height: 1.85;
 }
 .closing-section {
   background: var(--surface);
   border-radius: 12px;
-  padding: 68px 30px;
+  padding: var(--section-space) var(--card-space);
   text-align: center;
   position: relative;
-  margin-bottom: 85px;
+  margin-bottom: 0;
 }
 .closing-section .eyebrow {
   justify-content: center;
 }
 .closing-section h2 {
   margin-top: 20px;
+  font-size: clamp(34px, 8.6vw, 64px);
 }
 .closing-section > p:not(.eyebrow):not(.purchase-note) {
   margin-top: 22px;
@@ -811,14 +866,14 @@ p {
   margin-top: 27px;
 }
 .closing-section .purchase-note {
-  font-size: 10px;
+  font-size: 12px;
 }
 .footer {
   display: flex;
   align-items: center;
   gap: 32px;
   flex-wrap: wrap;
-  padding-block: 0 42px;
+  padding-block: var(--section-space) 32px;
 }
 .footer .brand {
   font-size: 27px;
@@ -834,14 +889,15 @@ p {
 .footer nav {
   margin-left: auto;
   display: flex;
-  gap: 22px;
-  font-size: 10px;
+  gap: 12px 24px;
+  flex-wrap: wrap;
+  font-size: 12px;
 }
 .footer small {
   width: 100%;
-  font-size: 8px;
+  font-size: 10px;
   color: var(--muted);
-  padding-top: 22px;
+  padding-top: 24px;
   border-top: 1px solid var(--line);
 }
 .legal {
@@ -1068,29 +1124,16 @@ p {
     max-width: 360px;
     font-size: 13px;
   }
-  .demo-layout {
-    gap: 50px;
-  }
-  .feature-pair {
-    gap: 65px;
-  }
-  .pace-art {
-    min-height: 610px;
-  }
-  .steps {
-    gap: 25px;
-  }
-  .privacy-grid {
-    gap: 30px;
-  }
-  .faq-section {
-    gap: 55px;
-  }
   .asset-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 760px) {
+  :root {
+    --section-space: clamp(48px, 8vw, 64px);
+    --group-space: 32px;
+    --card-space: clamp(20px, 5.5vw, 28px);
+  }
   .wrap {
     width: calc(100% - 40px);
   }
@@ -1170,14 +1213,11 @@ p {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 16px 12px;
-    padding-block: 23px;
+    padding-block: 24px;
     font-size: 10px;
   }
   .trust-strip span {
     gap: 8px;
-  }
-  .entry-section {
-    padding-block: 56px;
   }
   .entry-heading,
   .entry-grid {
@@ -1192,11 +1232,10 @@ p {
     font-size: 15px;
   }
   .entry-grid {
-    margin-top: 28px;
-    gap: 18px;
+    gap: 24px;
   }
-  .entry-card {
-    --entry-padding: 24px;
+  .feature-video-stage {
+    padding: 10px;
   }
   .entry-card > p:last-of-type {
     font-size: 15px;
@@ -1211,8 +1250,8 @@ p {
     flex-direction: column;
     gap: 20px;
   }
-  .section {
-    padding-block: 69px;
+  .section-intro {
+    display: block;
   }
   .section-intro h2 {
     margin-top: 18px;
@@ -1223,10 +1262,10 @@ p {
   .steps {
     grid-template-columns: 1fr;
     gap: 32px;
-    margin-top: 36px;
+    margin-top: var(--group-space);
   }
   .steps article {
-    padding-top: 19px;
+    padding-top: 24px;
   }
   .steps h3 {
     margin-top: 13px;
@@ -1237,24 +1276,17 @@ p {
   .step-line,
   .expense-mini {
     max-width: 340px;
-    margin-top: 19px;
-  }
-  .demo-section {
-    padding: 59px 0;
   }
   .demo-layout {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: var(--group-space);
   }
   .demo-layout h2 {
     margin-top: 19px;
   }
-  .demo-layout > div > p:not(.eyebrow) {
+  .demo-layout > div:not(.calculator) > p:not(.eyebrow) {
     font-size: 13px;
     margin-top: 20px;
-  }
-  .calculator {
-    padding: 24px;
   }
   .feature-pair {
     display: flex;
@@ -1269,13 +1301,8 @@ p {
   }
   .pace-art {
     width: 100%;
-    min-height: 580px;
-  }
-  .pace-art .phone {
-    width: 220px;
-  }
-  .privacy-section {
-    padding: 60px 0;
+    --pace-phone-height: 480px;
+    padding: 28px 24px;
   }
   .privacy-heading {
     display: block;
@@ -1287,22 +1314,25 @@ p {
   }
   .privacy-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
-    margin-top: 31px;
+    gap: 32px;
+    margin-top: var(--group-space);
   }
   .privacy-grid article {
-    padding-top: 17px;
+    padding-top: 24px;
   }
   .privacy-grid h3 {
     margin-top: 12px;
   }
   .privacy-grid p {
-    font-size: 13px;
+    font-size: 14px;
     margin-top: 12px;
   }
   .faq-section {
     grid-template-columns: 1fr;
-    gap: 27px;
+    gap: var(--group-space);
+  }
+  .faq-section h2 {
+    font-size: clamp(36px, 12vw, 50px);
   }
   .faq-section h2 br {
     display: none;
@@ -1310,20 +1340,8 @@ p {
   .faq-section h2 em {
     margin-left: 8px;
   }
-  .questions summary {
-    font-size: 12px;
-    padding-block: 19px;
-  }
   .closing-section {
-    padding: 48px 20px;
-    margin-bottom: 52px;
     border-radius: 9px;
-  }
-  .closing-section h2 {
-    font-size: 58px;
-  }
-  .closing-section .purchase-note {
-    font-size: 9px;
   }
   .footer {
     gap: 20px;
@@ -1333,13 +1351,9 @@ p {
     width: 100%;
     flex-wrap: wrap;
   }
-  .footer small {
-    padding-top: 14px;
-    font-size: 8px;
-  }
   .footer > p {
     margin-left: auto;
-    font-size: 9px;
+    font-size: 10px;
   }
   .legal {
     padding-top: 40px;
