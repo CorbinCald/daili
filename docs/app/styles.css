@@ -14,6 +14,7 @@
   --accent: #176b68;
   --line: #cedbdf;
   --sans: "IBM Plex Sans", Arial, sans-serif;
+  --header-height: clamp(80px, 11svh, 114px);
 }
 * {
   box-sizing: border-box;
@@ -106,7 +107,7 @@ p {
   margin-inline: auto;
 }
 .header {
-  height: 114px;
+  height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -181,15 +182,24 @@ p {
   border-radius: 50%;
 }
 .hero {
+  /* Reserve the header and equal breathing room inside the visible viewport.
+     Short or zoomed windows can grow naturally instead of clipping content. */
+  --hero-padding: clamp(24px, 4svh, 56px);
+  --hero-art-height: clamp(
+    420px,
+    calc(100svh - var(--header-height) - 2 * var(--hero-padding)),
+    700px
+  );
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   align-items: center;
-  min-height: 710px;
-  padding-block: 22px 64px;
+  min-height: calc(100svh - var(--header-height));
+  padding-block: var(--hero-padding);
   gap: 24px;
 }
 .hero h1 {
-  margin-top: 29px;
+  font-size: clamp(56px, min(6.7vw, 11svh), 98px);
+  margin-top: clamp(18px, 2.4svh, 29px);
 }
 .hero-description {
   font-size: 15px;
@@ -246,7 +256,8 @@ p {
   margin-top: 15px;
 }
 .hero-art {
-  height: 650px;
+  height: var(--hero-art-height);
+  padding: 20px 20px 52px;
   display: grid;
   place-items: center;
   position: relative;
@@ -255,8 +266,7 @@ p {
 .hero-art::before {
   content: "";
   position: absolute;
-  width: 90%;
-  height: 93%;
+  inset: 0 5%;
   background: var(--surface);
   border-radius: 18px;
   z-index: -2;
@@ -312,9 +322,15 @@ p {
   border-radius: 50%;
 }
 .hero-phone {
-  width: 280px;
+  /* The intact screen is 2.3111 times its width, including its status bar.
+     Account for the frame and reserve space for the caption below it. */
+  width: min(280px, calc((var(--hero-art-height) - 90px) / 2.311111 + 18px));
+  max-width: 100%;
   transform: none;
-  margin-top: -9px;
+  margin-top: 0;
+}
+.hero-art .image-caption {
+  bottom: 16px;
 }
 .image-caption {
   position: absolute;
@@ -1034,15 +1050,6 @@ p {
   color: var(--ink);
 }
 @media (min-width: 1440px) {
-  .hero {
-    min-height: 790px;
-  }
-  .hero-art {
-    height: 700px;
-  }
-  .hero-phone {
-    width: 275px;
-  }
   .hero-description {
     font-size: 16px;
   }
@@ -1053,16 +1060,6 @@ p {
   }
   .hero {
     gap: 12px;
-    min-height: 665px;
-  }
-  .hero-art {
-    height: 595px;
-  }
-  .hero-phone {
-    width: 225px;
-  }
-  .hero h1 {
-    font-size: 70px;
   }
   .hero-actions {
     gap: 16px;
@@ -1070,10 +1067,6 @@ p {
   .hero-description {
     max-width: 360px;
     font-size: 13px;
-  }
-  .hero-art::before {
-    height: 92%;
-    width: 96%;
   }
   .demo-layout {
     gap: 50px;
@@ -1129,9 +1122,10 @@ p {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    padding-top: 28px;
-    padding-bottom: 35px;
-    gap: 15px;
+    --hero-padding: 32px;
+    --hero-art-height: clamp(500px, 145vw, 600px);
+    padding-block: var(--hero-padding);
+    gap: 32px;
     min-height: 0;
   }
   .eyebrow {
@@ -1162,19 +1156,12 @@ p {
     font-size: 11px;
   }
   .hero-art {
-    height: 575px;
     width: 100%;
     max-width: 480px;
     align-self: center;
-    margin-top: 20px;
-  }
-  .hero-phone {
-    width: 220px;
-    margin-top: 0;
   }
   .hero-art::before {
-    height: 93%;
-    width: 100%;
+    inset: 0;
   }
   .image-caption {
     bottom: 5px;
@@ -1427,9 +1414,6 @@ p {
   }
   .hero .purchase-note {
     font-size: 13px;
-  }
-  .hero-art {
-    height: 565px;
   }
 }
 
