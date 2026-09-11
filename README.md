@@ -18,3 +18,8 @@ Model provenance and license terms are documented in
 The product site is a static export under `docs/app/`. Publish only the production
 website build; campaign review pages and planning files stay private. The existing
 privacy page remains at `docs/index.html`.
+
+Publish `docs/index.html`, `docs/model-notices.html`, and `docs/licenses/`
+together when the app's privacy behavior or model components change. Keep them
+in sync with the source copies maintained alongside the app, and describe older
+supported versions when their behavior differs.
