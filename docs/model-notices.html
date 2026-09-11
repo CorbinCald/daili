@@ -23,11 +23,11 @@
 </head>
 <body>
   <h1>Daili — Model Licenses and Notices</h1>
-  <p class="updated">Last updated: July 11, 2026</p>
+  <p class="updated">Last updated: September 11, 2026</p>
   <p>
-    Daili optionally downloads the following third-party machine-learning model files.
-    They run locally on the user's device. These notices apply to the model artifacts;
-    they do not change the license of Daili as a whole.
+    Daili bundles or optionally downloads the following third-party machine-learning
+    model files. They run locally on the user's device. These notices apply to the
+    model artifacts; they do not change the license of Daili as a whole.
   </p>
 
   <h2>PP-OCRv6 small</h2>
@@ -45,21 +45,63 @@
   </ul>
   <p><a href="./licenses/PaddleOCR-LICENSE.txt">Read the complete PaddleOCR license</a></p>
 
-  <h2>Moonshine v2 streaming-tiny (English)</h2>
+  <h2>Moonshine v2 streaming-tiny and streaming-small (English)</h2>
   <p>
-    Daili's optional voice entry uses the English Moonshine v2 streaming-tiny model from
-    <a href="https://github.com/moonshine-ai/moonshine">Moonshine AI</a>.
+    Daili's optional voice entry uses the English Moonshine v2 streaming-tiny model as
+    its standard tier and offers streaming-small as an opt-in accuracy tier. Both come
+    from <a href="https://github.com/moonshine-ai/moonshine">Moonshine AI</a>.
   </p>
   <ul>
     <li>Copyright © 2025 Useful Sensors, Inc. (dba Moonshine AI)</li>
     <li>License for the English-language model: MIT License</li>
     <li>
-      Daili converted the original floating-point ONNX graphs to ONNX Runtime format for
-      local mobile inference, quantizing four of the five graphs; the audio frontend is
-      kept at full floating-point precision for accuracy.
+      For the standard tier, Daili converted the original floating-point ONNX graphs to
+      ONNX Runtime format for local mobile inference, quantizing four of the five graphs;
+      the audio frontend is kept at full floating-point precision for accuracy.
+    </li>
+    <li>
+      The accuracy tier derives from Moonshine Voice v0.1.5's published
+      <code>small-streaming-en/quantized_26_08_21</code> model, whose audio frontend is
+      stored as 8-bit codes and expanded to floating point on the device when the model
+      loads. Daili stores the tied decoder embedding once instead of serializing its
+      exact transpose twice and retains the adapter positions reachable under Daili's
+      bounded listening duration. Daili calibrates selected weight matrices to
+      64-value integer palettes and retains 50 sensitive matrices at their original
+      precision. The frontend, embeddings, tokenizer, scales, and inference operators
+      are retained. The resulting model is delivered in reversible DMP1 archives
+      and expanded locally. Calibration changes weights; archive decoding restores
+      those calibrated weights exactly.
     </li>
   </ul>
   <p><a href="./licenses/Moonshine-LICENSE.txt">Read the complete Moonshine license</a></p>
+
+  <h2>FiniteStateEntropy</h2>
+  <p>
+    Daili's model archive decoder includes BSD 2-Clause licensed code by Yann Collet
+    from <a href="https://github.com/Cyan4973/FiniteStateEntropy/tree/9ba32518ad023cd4c3726fb44bba5b768ef291c8">FiniteStateEntropy</a>.
+    The notice is also included in the Android package's assets.
+    <a href="./licenses/FiniteStateEntropy-LICENSE.txt">Read the complete license</a>.
+  </p>
+
+  <h2>Silero VAD v6.2.1</h2>
+  <p>
+    Daili's voice endpoint detector uses the 16 kHz opset-15 ONNX artifact from
+    <a href="https://github.com/snakers4/silero-vad">Silero VAD</a>. It analyzes a
+    detector-only copy of microphone frames; it does not replace or modify the audio
+    sent to Moonshine.
+  </p>
+  <ul>
+    <li>Copyright © 2020-present Silero Team</li>
+    <li>License: MIT License</li>
+    <li>Upstream version: <code>v6.2.1</code></li>
+    <li>Upstream commit: <code>7e30209a3e901f9842f81b225f3e93d8199902b1</code></li>
+    <li>
+      Model SHA-256:
+      <code>7ed98ddbad84ccac4cd0aeb3099049280713df825c610a8ed34543318f1b2c49</code>
+      (1,289,603 bytes)
+    </li>
+  </ul>
+  <p><a href="./licenses/Silero-VAD-LICENSE.txt">Read the complete Silero VAD license</a></p>
 
   <p><a href="./">Return to Daili's privacy policy</a></p>
 </body>

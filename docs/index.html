@@ -22,13 +22,14 @@
 </head>
 <body>
   <h1>Daili — Privacy Policy</h1>
-  <p class="updated">Last updated: August 7, 2026</p>
+  <p class="updated">Last updated: September 11, 2026</p>
 
   <p>
     Daili is a daily budgeting app developed and published by Corbin Caldwell.
-    Daili has no accounts, advertising, analytics, or backend service that receives
-    your data. Your budget records, receipt images, and microphone audio are not
-    uploaded.
+    Daili has no accounts, advertising, analytics, or app backend that receives
+    your financial records. Daili itself does not upload your budget records, receipt images,
+    or microphone audio. If you explicitly turn on Android backup, Android may
+    back up the limited data described below to your Google account.
   </p>
 
   <h2>Information stored on your device</h2>
@@ -42,9 +43,48 @@
     <li>Optional receipt-reading and speech-recognition model files</li>
   </ul>
   <p>
-    This information is processed locally and is not sent to the developer or another
-    company. Android cloud backup is disabled for Daili, so the operating system is
-    instructed not to back up this app data to Google Drive.
+    This information is processed locally and is not sent to the developer. The only
+    optional transfer of financial records is the Android backup you can choose below.
+  </p>
+
+  <h2>Optional encrypted Android backup</h2>
+  <p>
+    In Daili 1.13.0, Android cloud backup is disabled. The optional backup behavior
+    described here applies to newer releases, including test builds, that offer
+    <strong>Data backup</strong> in Settings.
+  </p>
+  <p>
+    Android backup is off unless you choose to turn it on. After you successfully add
+    your fifth expense, Daili waits two seconds and offers the choice once. Choosing
+    <strong>Keep backup off</strong> or tapping outside the prompt leaves it off. You
+    can also turn it on or off at any time under <strong>Data backup</strong> in Settings.
+  </p>
+  <p>
+    When enabled, Daili permits Android to back up only the SQLite ledger and settings,
+    supported migration data, and the backup-consent setting. This can include budgets,
+    expenses, monthly plan history, recurring expenses, reminders, and app preferences.
+    Cloud backup requires Android's client-side encryption capabilities, which normally
+    require device backup and a screen lock to be enabled. The backup belongs to your
+    Google account; Daili's developer cannot view or retrieve it. Google handles it under
+    the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.
+  </p>
+  <p>
+    Receipt and expense photos, downloaded AI models, caches, temporary camera or audio
+    files, and logs are excluded from cloud backup. Android's direct device-to-device
+    transfer may include app-private receipt photos. If a cloud-restored expense refers
+    to an excluded photo, Daili removes the unavailable photo reference while preserving
+    the expense.
+  </p>
+  <p>
+    Android schedules Auto Backup asynchronously, only while its device and account
+    requirements are met, and limits each app's cloud backup to 25 MB. A backup may be
+    older than your newest changes, unavailable, or unable to complete, so this feature
+    is not an immediate or unconditional backup guarantee. Turning the feature off stops
+    Daili from contributing financial data to future backups. Declining the initial offer
+    emits no Daili backup data. If you previously enabled backup and then turn it off,
+    Daili retains only a small off/reset marker so a later completed Android backup can
+    replace an older ledger snapshot; an older snapshot may remain until that pass
+    completes or you remove it through Android or Google backup settings.
   </p>
 
   <h2>Optional model downloads</h2>
@@ -53,8 +93,8 @@
     When you turn either feature on, Daili downloads the required model files over HTTPS
     from Daili's GitHub Releases. If a file cannot be fetched from GitHub, Daili retries it
     from a public, read-only Amazon S3 bucket the developer maintains as a mirror. That
-    bucket holds nothing but the same model files, and it accepts downloads only — it
-    cannot receive anything from your device. No budget records, expense details, photos,
+    bucket serves the same model files and does not accept uploads from the app.
+    No budget records, expense details, photos,
     receipt text, or microphone audio are included in requests to either host.
   </p>
   <p>
@@ -73,9 +113,26 @@
 
   <h2>Data collection and sharing</h2>
   <p>
-    The developer does not collect, sell, or share your personal data. Daili contains no
-    advertising, analytics, or crash-reporting service. User-created data is accessed and
-    processed only on your device.
+    Daili does not automatically collect, sell, or share your personal data. It contains no
+    advertising, analytics, or automatic crash-reporting service. User-created data is accessed and
+    processed on your device, except for the optional Android backup transfer described
+    above, which is controlled by Android and your Google account.
+  </p>
+
+  <h2>Optional browser search and support email</h2>
+  <p>
+    Currency conversion uses rates stored on your device or entered by you. If you
+    choose <strong>Search in Browser</strong>, Daili opens a Google search for the two
+    selected currency codes and an exchange rate for one unit. Your budget, expenses,
+    and entered amounts are not included. Google handles the search under the
+    <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.
+  </p>
+  <p>
+    If you choose <strong>Report problem</strong> on a storage-error screen, Daili
+    opens an email draft containing the storage phase and error code, without ledger
+    contents. You can review, edit, or discard it. If you send it or otherwise email
+    the developer, your email provider delivers your email address and the message
+    you choose to send. Daili does not send support reports automatically.
   </p>
 
   <h2>Optional Play Store rating</h2>
@@ -104,17 +161,19 @@
     </li>
     <li>
       <strong>Network access:</strong> used to download the optional on-device model files
-      described above and, when you choose the Settings link, to open Daili's Google Play
-      rating page.
+      described above. Links you choose can also open the privacy policy, model notices,
+      Google Play rating page, browser search, or your email app.
     </li>
   </ul>
   <p>You can use Daili's core manual budgeting features without camera or microphone access.</p>
 
   <h2>Security</h2>
   <p>
-    Daili keeps your records in Android's app-private storage, disables Android cloud backup,
-    and uses HTTPS for optional model downloads. Other apps cannot normally access Daili's
-    private files unless the device's security has been compromised.
+    Daili keeps your records in Android's app-private storage and uses HTTPS for optional
+    model downloads. If you enable cloud backup, Daili requires Android's client-side
+    encryption capability and limits backup to an explicit file allowlist. Other apps
+    cannot normally access Daili's private files unless the device's security has been
+    compromised.
   </p>
 
   <h2>Retention and deletion</h2>
@@ -123,9 +182,15 @@
     Turning off an AI feature removes that feature's downloaded model files. The in-app
     <strong>Reset app</strong> action removes your saved budget, expenses, recurring expenses,
     attached and cached photos, downloaded models, notification schedules, and settings.
-    Clearing Daili's storage in Android settings or uninstalling the app also removes its local
-    files. The developer cannot recover any of this information because the developer never
-    receives it.
+    Reset also turns off Daili's backup gate before deleting the ledger and, if backup had
+    been enabled, stores only the off/reset marker described above. An earlier snapshot
+    may remain with Google until
+    Android completes a later device backup or you remove it through the device's backup
+    settings. Clearing Daili's storage in
+    Android settings or uninstalling the app removes local files, but a previously enabled
+    Android backup may restore included data on reinstall. You can remove stored device
+    backups through Android or Google backup settings. The developer cannot recover any of
+    this information because the developer never receives or controls the backup.
   </p>
   <p>Daili does not create user accounts, so there is no separate account to delete.</p>
 
