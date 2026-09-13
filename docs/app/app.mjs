@@ -1,4 +1,5 @@
 import "./feature-videos.mjs";
+import { mountDailiSimulation } from "./sim/app.mjs";
 
 const form = document.querySelector("#allowance-form");
 const money = new Intl.NumberFormat("en-US", {
@@ -66,9 +67,32 @@ const source =
   incoming.get("utm_campaign") === "daili_relaunch_2026"
     ? "google"
     : "website";
-for (const link of document.querySelectorAll("[data-play-link]")) {
-  const target = new URL(link.href);
+const withCampaignLabels = (href) => {
+  const target = new URL(href);
   target.searchParams.set("utm_source", source);
   target.searchParams.set("utm_campaign", `daili_relaunch_2026_${theme}`);
-  link.href = target.href;
+  return target.href;
+};
+for (const link of document.querySelectorAll("[data-play-link]")) {
+  link.href = withCampaignLabels(link.href);
+}
+
+// The hero phone runs a simulated Daili with sample data. Receipt scanning and
+// voice entry stay in the Android app; everything else works in the page, and
+// nothing typed into it is sent anywhere or stored. Its own Play links carry
+// the same allowlisted campaign labels as the page's CTAs.
+const simulationMount = document.querySelector("[data-daili-sim] .sim-mount");
+if (simulationMount) {
+  const display = simulationMount.closest("[data-daili-sim]");
+  try {
+    mountDailiSimulation(simulationMount, {
+      appVersion: display.dataset.appVersion,
+      playUrl: withCampaignLabels(display.dataset.playUrl),
+    });
+  } catch (error) {
+    console.error(
+      "Daili simulation failed to start; keeping the capture.",
+      error,
+    );
+  }
 }
