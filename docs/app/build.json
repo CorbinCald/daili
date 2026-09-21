@@ -1,7 +1,7 @@
 {
-  "source": "82a9dd7f2b8bd53169adf61298461ec44ad89ff1",
-  "version": "1.2.1",
-  "digest": "c8da06d54ec824f5d91f62a9f7d3805272f2da8d8c1dd6d34eba1992deb31f59",
-  "published": "2026-09-21T00:37:53Z",
-  "run": "https://github.com/CorbinCald/daili-app/actions/runs/35547651715"
+  "source": "875045da3a091cd1f2bbe63f3e5506806b5d0e59",
+  "version": "1.2.2",
+  "digest": "bd07258bcb511db11dbf07da0c5281374e2117036f755743ef15c227c830f61a",
+  "published": "2026-09-21T00:51:12Z",
+  "run": "https://github.com/CorbinCald/daili-app/actions/runs/35548831646"
 }
