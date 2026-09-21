@@ -1,1 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://daili.info/</loc></url><url><loc>https://daili.info/website-privacy.html</loc></url></urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://daili.info/</loc><lastmod>2026-09-20</lastmod></url>
+  <url><loc>https://daili.info/guides/</loc><lastmod>2026-09-20</lastmod></url>
+  <url><loc>https://daili.info/daily-budget-calculator/</loc><lastmod>2026-09-20</lastmod></url>
+  <url><loc>https://daili.info/offline-budget-app/</loc><lastmod>2026-09-20</lastmod></url>
+  <url><loc>https://daili.info/budget-app-without-subscription/</loc><lastmod>2026-09-20</lastmod></url>
+  <url><loc>https://daili.info/receipt-scanner/</loc><lastmod>2026-09-20</lastmod></url>
+  <url><loc>https://daili.info/voice-expense-tracker/</loc><lastmod>2026-09-20</lastmod></url>
+  <url><loc>https://daili.info/website-privacy/</loc><lastmod>2026-09-20</lastmod></url>
+</urlset>

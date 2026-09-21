@@ -1,6 +1,1 @@
-const demos = [...document.querySelectorAll("video")];
-for (const demo of demos) {
-  demo.addEventListener("play", () => {
-    for (const other of demos) if (other !== demo) other.pause();
-  });
-}
+var t=[...document.querySelectorAll("video")];for(let o of t)o.addEventListener("play",()=>{for(let e of t)e!==o&&e.pause()});

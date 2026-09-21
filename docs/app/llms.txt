@@ -1,0 +1,22 @@
+# Daili
+
+> A daily budget and expense tracker for Android. One purchase, no subscription, bank connection or Daili account.
+
+Manual budgeting works offline. Optional receipt scanning and English voice entry require model downloads, then run on the phone. Review recognition before saving. Google Play shows current regional pricing and device compatibility.
+
+## Website
+- [Daili](https://daili.info/): Turn your monthly budget into a daily allowance with rollover. Track expenses privately on Android. One purchase, no subscription or bank connection.
+- [Daili guides](https://daili.info/guides/): Explore Daili’s daily budget calculator, offline budgeting, one-time purchase, receipt scanning and English voice expense entry for Android.
+- [Daily budget calculator](https://daili.info/daily-budget-calculator/): Calculate a starting daily allowance from your monthly spending cap and recurring expenses. Try a free, private calculator and see how Daili handles rollover.
+- [Offline budgeting](https://daili.info/offline-budget-app/): Use Daili to track expenses offline without linking a bank or creating an account. Learn what stays on your phone and what needs an initial download.
+- [One-time purchase](https://daili.info/budget-app-without-subscription/): Daili is a one-time purchase budget app for Android, with no subscription or in-app purchases. See what is included and check your local Google Play price.
+- [Receipt scanning](https://daili.info/receipt-scanner/): Scan receipts into your daily budget with Daili. Review merchant, total and line items before saving. Optional recognition runs on your Android phone after setup.
+- [Voice expense entry](https://daili.info/voice-expense-tracker/): Speak an expense in English, review the recognized details and save it in Daili. Optional voice entry works on your Android phone after a model download.
+- [Website privacy](https://daili.info/website-privacy/): Your privacy on the Daili website: local calculator inputs, saved appearance preferences, no advertising scripts, and the Android app privacy policy.
+
+## Official links
+- [Google Play](https://play.google.com/store/apps/details?id=com.corbincald.daili)
+- [App privacy policy](https://corbincald.github.io/daili/)
+- [Model notices](https://corbincald.github.io/daili/model-notices.html)
+
+The website calculator is an illustration, not a bank balance. This file is a convenience for readers and agents, not a search-engine indexing requirement.
