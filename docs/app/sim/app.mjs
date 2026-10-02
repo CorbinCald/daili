@@ -1,6 +1,6 @@
 // Mounts the simulated Daili phone into the landing page's hero frame: an
-// in-memory store seeded with sample data, the three tabs with their dissolve
-// and swipe navigation, the pushed routes and sheets, and the theme painter.
+// in-memory store seeded with sample data, the three tabs with swipe
+// navigation, the pushed routes and sheets, and the theme painter.
 
 import { formatDateKey, parseDateKey } from "./budget.mjs";
 import { createCurrencyProfile } from "./format.mjs";
@@ -21,7 +21,6 @@ import { renderSettingsScreen } from "./screens/settings.mjs";
 import { renderTodayScreen } from "./screens/today.mjs";
 
 export const SIM_WIDTH = 360;
-const TAB_FADE_MS = 200;
 const SWIPE_DISTANCE = 48;
 const SWIPE_EDGE_GUARD = 24;
 
@@ -280,11 +279,11 @@ export function mountDailiSimulation(
     return tab.render(ctx);
   }
 
-  function render({ transition = false } = {}) {
+  function render() {
     paintTheme();
     const state = store.getState();
     const key = state.hasCompletedOnboarding ? ui.tab : "onboarding";
-    if (currentScreen && key === currentTab && !transition) {
+    if (currentScreen && key === currentTab) {
       rememberScroll();
       const focused = document.activeElement;
       const focusKey =
@@ -304,40 +303,30 @@ export function mountDailiSimulation(
       }
     } else {
       rememberScroll();
-      const previous = currentScreen;
       const next = buildScreen();
-      next.classList.add("is-entering");
-      screenLayer.append(next);
+      // Swap complete, opaque screens in one paint. Fading both layers
+      // exposes the background and flashes, especially during rapid changes.
+      screenLayer.replaceChildren(next);
       currentScreen = next;
       currentTab = key;
       restoreScroll(next);
-      requestAnimationFrame(() =>
-        requestAnimationFrame(() => next.classList.remove("is-entering")),
-      );
-      if (previous) {
-        // The departing screen only fades; it must not catch taps or focus.
-        previous.classList.add("is-leaving");
-        previous.setAttribute("aria-hidden", "true");
-        previous.inert = true;
-        window.setTimeout(() => previous.remove(), TAB_FADE_MS);
-      }
     }
     renderTabBar();
   }
 
-  function scheduleRender(options) {
+  function scheduleRender() {
     if (renderQueued) return;
     renderQueued = true;
     requestAnimationFrame(() => {
       renderQueued = false;
-      render(options);
+      render();
     });
   }
 
   function switchTab(tabId) {
     if (ui.tab === tabId) return;
     ui.tab = tabId;
-    render({ transition: true });
+    render();
   }
 
   // Horizontal swipes move between tabs, like the app's swipe navigator.
