@@ -23,27 +23,70 @@
 </head>
 <body>
   <h1>Daili — Model Licenses and Notices</h1>
-  <p class="updated">Last updated: September 11, 2026</p>
+  <p class="updated">Last updated: October 11, 2026</p>
   <p>
     Daili bundles or optionally downloads the following third-party machine-learning
     model files. They run locally on the user's device. These notices apply to the
     model artifacts; they do not change the license of Daili as a whole.
   </p>
 
-  <h2>PP-OCRv6 small</h2>
+  <h2>PP-OCRv6 small and PP-OCRv5 Korean mobile</h2>
   <p>
     Daili's receipt recognition uses PP-OCRv6 small detection and recognition artifacts
-    derived from <a href="https://github.com/PaddlePaddle/PaddleOCR">PaddleOCR</a>.
+    derived from <a href="https://github.com/PaddlePaddle/PaddleOCR">PaddleOCR</a>. Devices
+    set to Korean, or located in Korea, instead download the PP-OCRv5 Korean mobile
+    recognition artifact from the same project.
   </p>
   <ul>
     <li>Copyright © 2016 PaddlePaddle Authors. All Rights Reserved.</li>
     <li>License: Apache License 2.0</li>
     <li>
-      Daili changed the recognition artifact by slicing its output classes to the Latin
-      subset. The detection artifact is served without that modification.
+      For receipts in Latin-script languages, Daili changed the PP-OCRv6 recognition
+      artifact by slicing its output classes to the Latin subset.
     </li>
+    <li>
+      For Japanese receipts, Daili changed the PP-OCRv6 recognition artifact in three
+      ways. Its weights were fine-tuned on text lines of receipt photographs from the
+      datasets credited below. An appended operation limits its output classes to 6,908
+      of its characters, the ones a Japanese receipt prints, and its character
+      dictionary is cut down to match. Two more appended operations report the most
+      probable character and its probability at each step.
+    </li>
+    <li>
+      For Chinese and Korean receipts, Daili changed the PP-OCRv6 and PP-OCRv5 Korean
+      recognition artifacts by appending two operations that report the most probable
+      character and its probability at each step. Their weights and character
+      dictionaries are unchanged.
+    </li>
+    <li>The detection artifact is served without modification.</li>
   </ul>
   <p><a href="./licenses/PaddleOCR-LICENSE.txt">Read the complete PaddleOCR license</a></p>
+
+  <h2>Receipt datasets behind the Japanese recognition weights</h2>
+  <p>
+    The fine-tuning described above used text lines cropped from the receipt photographs
+    of three public datasets. Daili distributes the tuned weights, not the datasets.
+  </p>
+  <ul>
+    <li>
+      <a href="https://huggingface.co/datasets/llm-jp/jawildtext">JaWildText</a>
+      (Maeda and Okazaki, 2026), Apache License 2.0: the transcribed text lines of its
+      Japanese receipts, which the weights were tuned to read.
+    </li>
+    <li>
+      <a href="https://huggingface.co/datasets/naver-clova-ix/cord-v2">CORD v2</a>
+      (Park et al., 2019), licensed under
+      <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>: text lines of
+      its receipts, used without their transcriptions so that the tuned weights go on
+      reading Latin print.
+    </li>
+    <li>
+      <a href="https://huggingface.co/datasets/jsdnrs/ICDAR2019-SROIE">ICDAR 2019 SROIE</a>
+      (Huang et al., 2019), licensed under
+      <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>: text lines of
+      its receipts, used the same way.
+    </li>
+  </ul>
 
   <h2>Moonshine v2 streaming-tiny and streaming-small (English)</h2>
   <p>
